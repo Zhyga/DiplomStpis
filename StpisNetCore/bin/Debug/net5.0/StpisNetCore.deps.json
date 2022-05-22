@@ -321,7 +321,8 @@
           "System.Xml.XmlSerializer.Reference": "5.0.0.0",
           "System.Xml.XPath": "5.0.0.0",
           "System.Xml.XPath.XDocument": "5.0.0.0",
-          "WindowsBase": "4.0.0.0"
+          "WindowsBase": "4.0.0.0",
+          "Interop.Microsoft.Office.Interop.Word": "8.7.0.0"
         },
         "runtime": {
           "StpisNetCore.dll": {}
@@ -3778,6 +3779,12 @@
           "WindowsBase.dll": {}
         },
         "compileOnly": true
+      },
+      "Interop.Microsoft.Office.Interop.Word/8.7.0.0": {
+        "compile": {
+          "Interop.Microsoft.Office.Interop.Word.dll": {}
+        },
+        "compileOnly": true
       }
     }
   },
@@ -6276,6 +6283,11 @@
       "sha512": ""
     },
     "WindowsBase/4.0.0.0": {
+      "type": "referenceassembly",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Interop.Microsoft.Office.Interop.Word/8.7.0.0": {
       "type": "referenceassembly",
       "serviceable": false,
       "sha512": ""

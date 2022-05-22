@@ -165,3 +165,6 @@ C:\Users\Zhyga\source\repos\StpisNetCore\StpisNetCore\bin\Debug\net5.0\System.We
 C:\Users\Zhyga\source\repos\StpisNetCore\StpisNetCore\bin\Debug\net5.0\System.Web.WebPages.Razor.dll
 C:\Users\Zhyga\source\repos\StpisNetCore\StpisNetCore\bin\Debug\net5.0\System.Web.WebPages.dll
 C:\Users\Zhyga\source\repos\StpisNetCore\StpisNetCore\bin\Debug\net5.0\Microsoft.Web.Infrastructure.dll
+C:\Users\Zhyga\source\repos\StpisNetCore\StpisNetCore\obj\Debug\net5.0\Interop.Microsoft.Office.Interop.Word.dll
+C:\Users\Zhyga\source\repos\StpisNetCore\StpisNetCore\obj\Debug\net5.0\StpisNetCore.csproj.ResolveComReference.cache
+C:\Users\Zhyga\source\repos\StpisNetCore\StpisNetCore\bin\Debug\net5.0\Template.docx

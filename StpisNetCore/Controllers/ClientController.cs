@@ -42,7 +42,9 @@ namespace StpisNetCore.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            tblClients Client = new tblClients();
+            Client.RolesList = _dbContext.role.ToList();
+            return View(Client);
         }
 
         [HttpPost]
@@ -55,7 +57,7 @@ namespace StpisNetCore.Controllers
                 _dbContext.clients.Add(Client);
                 _dbContext.SaveChanges();
             }
-            return View();
+            return RedirectToAction("Index");
         }
 
         [HttpGet]

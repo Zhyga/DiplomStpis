@@ -12,6 +12,8 @@ namespace StpisNetCore.Controllers
     public class AuthController : Controller
     {
         private readonly ModelsContext _dbContext;
+        private List<tblRole> roles;
+        static public bool bLoggedIn = false;
 
         static public string HashPassword(string input)
         {
@@ -32,6 +34,7 @@ namespace StpisNetCore.Controllers
         public AuthController(ModelsContext dbContext)
         {
             _dbContext = dbContext;
+            roles = _dbContext.role.ToList();
         }
 
         [HttpGet]
@@ -47,8 +50,10 @@ namespace StpisNetCore.Controllers
             if(Client.Id != 0 && Client.Password != null)
             {
                 string EncPassword = HashPassword(Password);
-                if (Client.Password.Equals(EncPassword))
+                bool isAdmin = roles.Find(r => r.Id == Client.Role_Id).Id == 1;
+                if (Client.Password.Equals(EncPassword) && isAdmin)
                 {
+                    bLoggedIn = true;
                     return RedirectToAction("Index", "Product");
                 }
             }
@@ -73,6 +78,7 @@ namespace StpisNetCore.Controllers
             }
             else
             {
+                bLoggedIn = true;
                 return RedirectToAction("Index", "Product");
             }
         }
