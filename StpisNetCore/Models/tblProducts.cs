@@ -17,7 +17,7 @@ namespace StpisNetCore.Models
         [Display(Name = "Price")]
         public decimal Price { get; set; }
 
-        [Display(Name = "Amoint")]
+        [Display(Name = "Amount")]
         public int Amount { get; set; }
 
         [Display(Name = "Description")]

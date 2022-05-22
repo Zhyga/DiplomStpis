@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewData["Title"] = "Stats";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+
+    List<tblClients> teachers = ViewData["Clients"] as List<tblClients>;
+    List<tblDeliveries> deliveries = ViewData["Deliveries"] as List<tblDeliveries>;
+    List<tblRegions> regions = ViewData["Regions"] as List<tblRegions>;
+}
+
+<div id="myPlot" style="width:100%;max-width:700px"></div>
+<div id="myPlot2" style="width:100%;max-width:700px"></div>
+
+@section Scripts{
+    <script src="~/js/plotly-2.11.1.min.js"></script>
+    <script>
+        let exp = "Доставки по регионам";
+
+         var dataFromCS = [""];
+
+           @foreach (var region in regions)
+           {
+              <text>
+        dataFromCS.push("@(region.RegionName)");
+              </text>
+           }
+        var regex = /\s/g;
+        var newData = [];
+        dataFromCS.forEach(function (item, index, array) {
+            for (var i = 0; i < item.length; i++) {
+                var t = item.charAt(i);
+                if (t == " ") {
+                    item = item.substr(0, i);
+                    newData.push(item);
+                    break;
+                }
+            }
+        });
+        dataFromCS.shift();
+        const yValues = [10,10,5,40,0,7,5];
+
+
+        const data = [{ x: dataFromCS, y: yValues, type: 'bar' }];
+        const layout = { title: exp };
+        Plotly.newPlot("myPlot", data, layout);
+
+
+
+        //Second
+        let exp2 = "Доставки по статусам";
+        var data2 = [{
+
+            values: [10, 1300, 200, 30],
+
+            labels: ['Canceled', 'Deliveried', 'In transit', 'Postponed'],
+
+            type: 'pie'
+
+        }];
+
+
+        var layout2 = {
+            title: exp2,
+            height: 400,
+            width: 500
+        };
+
+
+        Plotly.newPlot('myPlot2', data2, layout2);
+    </script>
+}

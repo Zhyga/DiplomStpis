@@ -29,7 +29,7 @@ namespace StpisNetCore
 
             var ConnectionString = Configuration.GetConnectionString("DevConnection");
 
-            services.AddDbContext<ProductContext>(options => options.UseSqlServer(ConnectionString));
+            services.AddDbContext<ModelsContext>(options => options.UseSqlServer(ConnectionString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
