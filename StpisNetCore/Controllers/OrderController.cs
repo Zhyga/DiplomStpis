@@ -57,7 +57,9 @@ namespace StpisNetCore.Controllers
                 _dbContext.orders.Add(Order);
                 _dbContext.SaveChanges();
             }
-            return View();
+            Order.ClientList = _dbContext.clients.ToList();
+            Order.ProductList = _dbContext.products.ToList();
+            return View(Order);
         }
 
         [HttpGet]

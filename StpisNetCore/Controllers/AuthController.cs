@@ -58,6 +58,7 @@ namespace StpisNetCore.Controllers
                 }
                 else
                 {
+                    bLoggedIn = false;
                     ViewBag.IncorectData = "Passwords or Login does not match";
                 }
             }
@@ -71,17 +72,22 @@ namespace StpisNetCore.Controllers
         }
 
         [HttpPost]
-        public IActionResult Registration(string Login, string Password, string PhoneNumber)
+        public IActionResult Registration(tblClients client)
         {
             Microsoft.Extensions.Primitives.StringValues CheckPas = "";
             Request.Form.TryGetValue("CheckPassword", out CheckPas);
-            if (!Password.Equals(CheckPas))
+            if (!client.Password.Equals(CheckPas))
             {
                 ViewBag.IncorectData = "Passwords does not match";
                 return View();
             }
             else
             {
+                string EncPassword = AuthController.HashPassword(client.Password);
+                client.Password = EncPassword;
+                client.Role_Id = 2;
+                _dbContext.clients.Add(client);
+                _dbContext.SaveChanges();
                 bLoggedIn = true;
                 return RedirectToAction("Index", "Product");
             }
