@@ -11,19 +11,19 @@ namespace StpisNetCore.Models
         [Key]
         public int Id { get; set; }
 
-        [Display(Name = "Title")]
+        [Display(Name = "Название")]
         public string Title { get; set; }
 
-        [Display(Name = "Price")]
+        [Display(Name = "Цена")]
         public decimal Price { get; set; }
 
-        [Display(Name = "Amount")]
+        [Display(Name = "Количество")]
         public int Amount { get; set; }
 
-        [Display(Name = "Description")]
+        [Display(Name = "Описание")]
         public string Description { get; set; }
 
-        [Display(Name = "Size")]
+        [Display(Name = "Размер")]
         public int Size { get; set; }
     }
 }

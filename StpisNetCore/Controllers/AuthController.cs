@@ -56,6 +56,10 @@ namespace StpisNetCore.Controllers
                     bLoggedIn = true;
                     return RedirectToAction("Index", "Product");
                 }
+                else
+                {
+                    ViewBag.IncorectData = "Passwords or Login does not match";
+                }
             }
             return View();
         }

@@ -12,20 +12,20 @@ namespace StpisNetCore.Models
         [Key]
         public int Id { get; set; }
 
-        [Display(Name = "Login")]
+        [Display(Name = "Логин")]
         public string Login { get; set; }
 
         public string Password { get; set; }
 
-        [Display(Name = "Address")]
+        [Display(Name = "Адрес")]
         public string Address { get; set; }
 
         [Column("phone_number")]
-        [Display(Name = "Phone Number")]
+        [Display(Name = "Номер телефона")]
         public string PhoneNumber { get; set; }
 
         [Column("role_id")]
-        [Display(Name = "RoleId")]
+        [Display(Name = "Роль")]
 
         public int Role_Id { get; set; }
 

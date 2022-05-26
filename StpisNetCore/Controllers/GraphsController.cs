@@ -25,8 +25,26 @@ namespace StpisNetCore.Controllers
         public IActionResult Index()
         {
             ViewData["Clients"] = _dbContext.clients.ToList();
-            ViewData["Deliveries"] = _dbContext.deliveries.ToList();
-            ViewData["Regions"] = _dbContext.region.ToList();
+            List<tblStatus> Statuses = _dbContext.status.ToList();
+            foreach(var status in Statuses)
+            {
+                status.Status.Trim();
+            }
+            ViewData["Status"] = Statuses;
+            List<tblDeliveries> deliveries = _dbContext.deliveries.ToList();
+            List<tblRegions> regions = _dbContext.region.ToList();
+            foreach(var region in regions)
+            {
+                foreach(var delivery in deliveries)
+                {
+                    if(delivery.RegionId == region.Id)
+                    {
+                        delivery.Region = region;
+                    }
+                }
+            }
+            ViewData["Deliveries"] = deliveries;
+            ViewData["Regions"] = regions;
             return View();
         }
 
@@ -62,10 +80,22 @@ namespace StpisNetCore.Controllers
             }
 
             List<KeyValuePair<string, string>> ProductAmount = new List<KeyValuePair<string, string>>();
+            List<tblOrders> productAmount = _dbContext.deliveries.Join(_dbContext.orders, d => d.OrderId, o => o.Id,
+                    (d, o) => new tblOrders
+                    {
+                        ProductAmount = o.ProductAmount,
+                        ProductId = o.ProductId,
+                    }).ToList();
             foreach (tblProducts product in products)
             {
-                List<tblOrders> temp = orders.FindAll(o => o.ProductId == product.Id);
-                ProductAmount.Add(new KeyValuePair<string, string>(product.Title.Substring(0,20), temp.Count.ToString()));
+                int counter = 0;
+                foreach(tblOrders orders1 in productAmount) {
+                    if (product.Id == orders1.ProductId)
+                    {
+                        counter++;
+                    }
+                }
+                ProductAmount.Add(new KeyValuePair<string, string>(product.Title.Substring(0,20), counter.ToString()));
             }
             ProductAmount.OrderBy(p => p.Value);
 

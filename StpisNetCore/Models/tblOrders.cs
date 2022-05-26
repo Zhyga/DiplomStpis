@@ -13,19 +13,19 @@ namespace StpisNetCore.Models
         public int Id { get; set; }
 
         [Column("client_id")]
-        [Display(Name = "Client Id")]
+        [Display(Name = "ID Клиента")]
         public int ClientId { get; set; }
 
         [Column("product_id")]
-        [Display(Name = "Product Name")]
+        [Display(Name = "Название товара")]
         public int ProductId { get; set; }
 
         [Column("order_number")]
-        [Display(Name = "Order Number")]
+        [Display(Name = "Номер заказа")]
         public int OrderNumber { get; set; }
 
         [Column("product_amount")]
-        [Display(Name = "Product Amount")]
+        [Display(Name = "Количество товара")]
         public int ProductAmount { get; set; }
 
         [NotMapped]

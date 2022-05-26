@@ -8,11 +8,12 @@
     List<tblClients> teachers = ViewData["Clients"] as List<tblClients>;
     List<tblDeliveries> deliveries = ViewData["Deliveries"] as List<tblDeliveries>;
     List<tblRegions> regions = ViewData["Regions"] as List<tblRegions>;
+    List<tblStatus> statuses = ViewData["Status"] as List<tblStatus>;
 }
 
 <div id="myPlot" style="width:100%;max-width:700px"></div>
 <div id="myPlot2" style="width:100%;max-width:700px"></div>
-<a asp-action="CreateDocument">CreateDocument</a> |
+<a asp-action="CreateDocument">Создать отчёт</a> 
 
 @section Scripts{
     <script src="~/js/plotly-2.11.1.min.js"></script>
@@ -40,7 +41,26 @@
             }
         });
         dataFromCS.shift();
-        const yValues = [10,10,5,40,0,7,5];
+
+        var yValues = [];
+         @foreach (var region in regions)
+           {
+              <text>
+                var amountOfDeliveries = 0;
+                </text>
+             foreach(var delivery in deliveries)
+                    {
+                        if(delivery.Region.Id == region.Id)
+                        {
+                            <text>
+                                amountOfDeliveries = amountOfDeliveries + 1;
+                            </text>
+                        }
+                    }
+              <text>
+        yValues.push(amountOfDeliveries);
+              </text>
+           }
 
 
         const data = [{ x: dataFromCS, y: yValues, type: 'bar' }];
@@ -51,11 +71,37 @@
 
         //Second
         let exp2 = "Доставки по статусам";
+
+        var StatusLabels = [];
+        var values = [];
+         @foreach (var status in statuses)
+           {
+                <text>
+                var amountOfDeliveries = 0;
+                </text>
+                <text>
+                StatusLabels.push("@(status.Status)");
+                </text>
+                    foreach (var delivery in deliveries)
+                    {
+                      if(delivery.StatusId == status.Id)
+                        {
+                            <text>
+                            amountOfDeliveries = amountOfDeliveries+1;
+                            </text>
+                        }
+                   }
+              <text>
+                values.push(amountOfDeliveries)
+              </text>
+           }
+
+
         var data2 = [{
 
-            values: [10, 1300, 200, 30],
+            values: values,
 
-            labels: ['Canceled', 'Deliveried', 'In transit', 'Postponed'],
+            labels: StatusLabels,
 
             type: 'pie'
 
